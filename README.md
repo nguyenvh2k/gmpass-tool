@@ -1,10 +1,8 @@
-# Tool mã hóa/giải mã Password server
-
-File tool: `tools/encode_server_password.py`
+# Tool mã hóa/giải mã Password VLTK Server Offline
 
 ## Bản app Windows C++ `.exe` (không cần Visual Studio)
 
-File: `tools/password_tool_ui.cpp`. Đây là app cửa sổ Windows thật (WinAPI),
+File: `password_tool_ui.cpp`. Đây là app cửa sổ Windows thật (WinAPI),
 có một ô **Input**, một ô **Output**, cùng hai nút **Encode** và **Decode**.
 Không dùng Qt, .NET hay Visual Studio. Icon của app lấy từ `tools/favicon.ico`.
 
@@ -12,8 +10,8 @@ Trên Windows đã cài MinGW-w64 có `g++` và `windres`, mở PowerShell tại
 gốc project rồi chạy:
 
 ```powershell
-.\tools\build_password_tool_ui.ps1
-.\tools\password_tool_ui.exe
+.\build_password_tool_ui.ps1
+.\password_tool_ui.exe
 ```
 
 Nếu PowerShell chặn file script ở lần đầu, chạy lệnh này chỉ cho cửa sổ PowerShell
@@ -23,11 +21,11 @@ hiện tại rồi build lại:
 Set-ExecutionPolicy -Scope Process Bypass
 ```
 
-Hoặc chạy file `tools/password_tool_ui.exe` bằng cách nhấp đúp. Script build
+Hoặc chạy file `password_tool_ui.exe` bằng cách nhấp đúp. Script build
 cũng tự nhúng icon `favicon.ico` vào file `.exe`.
 
 ```bash
-g++ -std=c++17 -O2 -mwindows -o tools/password_tool_ui.exe tools/password_tool_ui.cpp -luser32 -lgdi32
+g++ -std=c++17 -O2 -mwindows -o password_tool_ui.exe password_tool_ui.cpp -luser32 -lgdi32
 ```
 
 ## Phạm vi áp dụng
