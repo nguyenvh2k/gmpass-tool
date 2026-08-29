@@ -43,8 +43,6 @@ Tool tương thích với format chuỗi 32 ký tự của các trường sau:
 
 Không áp dụng tool này cho `[Setting] Password` dạng hex trong `gw/goddess.cfg` (ví dụ chuỗi bắt đầu `2DED...`); đó là cơ chế khác.
 
-Đã đối chiếu thực tế: chuỗi do `GMPassGen.exe` tạo `r60D0z0BEfZI66YGkBF_MS0FoU_mPOIV` được tool giải mã thành `1234560123`; vì vậy GMPassGen dùng cùng format này.
-
 ---
 
 ## Cơ chế
