@@ -2,7 +2,7 @@
 
 ## Giao diện Windows C++ (`password_tool_ui.exe`)
 
-Công cụ chạy dạng cửa sổ WinAPI thuần, không phụ thuộc vào Visual Studio, .NET hay Qt framework. Giao diện tích hợp sẵn ô **Input**, **Output** cùng hai nút bấm **Encode** và **Decode**. Icon của app sử dụng trực tiếp từ `tools/favicon.ico`.
+Công cụ chạy dạng  GUI WinAPI thuần. Giao diện tích hợp sẵn ô **Input**, **Output** cùng hai nút bấm **Encrypt** và **Decrypt**.`.
 
 ### Cách build từ PowerShell
 
@@ -63,7 +63,7 @@ Vì thuật toán và key đều nằm trong chuỗi/binary, người có quyề
 ## Giới hạn và lưu ý sử dụng
 
 * **Độ dài chuỗi gốc:** Plaintext dài từ 0 đến 20 ký tự ASCII in được.
-* **Mã hóa ngẫu nhiên:** Mỗi lần `encode` cùng một plaintext có thể cho chuỗi khác nhau vì key/padding được tạo ngẫu nhiên. Đây là bình thường; tất cả các chuỗi đó đều giải mã về cùng plaintext.
+* **Mã hóa ngẫu nhiên:** Mỗi lần `encrypt` cùng một plaintext có thể cho chuỗi khác nhau vì key/padding được tạo ngẫu nhiên. Đây là bình thường; tất cả các chuỗi đó đều giải mã về cùng plaintext.
 * **Dải ký tự đầu ra:** Chuỗi mới chỉ dùng chữ, số và các ký tự `_`, `[`, `]`, `` ` ``, `!`, `$` (trường hợp mật khẩu dài đúng 20 ký tự có thể có thêm `>`). Các chuỗi cũ vẫn giải mã bình thường.
 * **Cập nhật cấu hình:** Sau khi sửa cấu hình, khởi động lại đúng dịch vụ liên quan và kiểm tra log kết nối.
 * **Quy trình đổi pass MySQL:** Khi đổi password MySQL, cần đổi password thật trên MySQL trước, rồi cập nhật mọi dịch vụ đang dùng cùng tài khoản.
