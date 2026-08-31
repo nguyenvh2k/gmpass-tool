@@ -1,45 +1,78 @@
-# GM PassTool (MFC)
+# GM PassTool VLTK Offline
 
-Ứng dụng mã hóa và giải mã password GM VLTK, chuyển từ bản giao diện Win32 thuần sang MFC.
+Công cụ mã hóa và giải mã password dùng trong VLTK Server Offline. Giao diện được viết bằng C++ MFC và chỉnh sửa trực tiếp bằng Resource View của Visual Studio.
 
-## Cải tiến so với bản Win32 cũ
+## Tính năng
 
-- Dùng giao diện **MFC Dialog** và resource của Visual Studio; dễ chỉnh sửa giao diện bằng Resource View.
-- Gắn trực tiếp các nút **Encrypt** và **Decrypt** vào event handler MFC.
-- Giữ nguyên thuật toán password codec của bản Win32, nên các chuỗi mã hóa dài 32 ký tự vẫn giải mã tương thích giữa hai bản.
-- Vẫn tạo MD5 dạng chữ hoa cho password gốc sau khi Encrypt hoặc Decrypt.
-- Ô **Output** và **MD5** là read-only để tránh sửa nhầm kết quả.
-- Click vào Output hoặc MD5 sẽ chọn toàn bộ nội dung và tự copy vào clipboard.
-- Kiểm tra dữ liệu đầu vào và báo lỗi rõ ràng khi password không hợp lệ hoặc chuỗi mã hóa không đúng định dạng.
-- Build Release x64 để chạy tốt trên Windows 64-bit hiện nay.
+* Mã hóa password thành chuỗi 32 ký tự.
+* Giải mã chuỗi 32 ký tự về password gốc.
+* Tạo MD5 chữ hoa của password gốc.
+* Output và MD5 ở chế độ chỉ đọc.
+* Click vào Output hoặc MD5 để chọn và tự động copy.
+* Kiểm tra dữ liệu đầu vào và thông báo khi sai định dạng.
+* Tương thích với chuỗi được tạo bởi bản Win32 cũ.
 
 ## Cách dùng
 
-1. Nhập password gốc vào ô **Input** rồi chọn **Encrypt**.
-   - Output là chuỗi password đã mã hóa gồm 32 ký tự.
-   - MD5 là mã MD5 chữ hoa của password gốc.
-2. Hoặc nhập chuỗi mã hóa 32 ký tự vào **Input** rồi chọn **Decrypt**.
-   - Output là password đã giải mã.
-   - MD5 là mã MD5 chữ hoa của password vừa giải mã.
-3. Click vào Output hoặc MD5 để tự copy giá trị đó.
+### Mã hóa
+
+1. Nhập password vào **Input**.
+2. Nhấn **Encrypt**.
+3. **Output** trả về chuỗi mã hóa 32 ký tự.
+4. **MD5** trả về MD5 chữ hoa của password gốc.
+
+### Giải mã
+
+1. Nhập chuỗi mã hóa 32 ký tự vào **Input**.
+2. Nhấn **Decrypt**.
+3. **Output** trả về password gốc.
+4. **MD5** trả về MD5 chữ hoa của password đó.
+
+Click vào ô **Output** hoặc **MD5** để tự động copy kết quả.
+
+## Phạm vi áp dụng
+
+| Thành phần | File cấu hình                 | Trường sử dụng                                                         |
+| ---------- | ----------------------------- | ---------------------------------------------------------------------- |
+| Bishop     | `gw/bishop.cfg`               | `[Setting] Password`                                                   |
+| Goddess    | `gw/goddess.cfg`              | `[Database] Password`                                                  |
+| PaySys     | `Pays/database.ini`           | `Server`, `DataBase`, `User`, `PassWord` trong `[card]` và `[account]` |
+| S3Relay    | `gw/s3relay/relay_config.ini` | `[Database] Password`, `[Setting] Password` nếu cùng định dạng         |
+| GMPassGen  | `volam/GMPassGen.exe`         | Chuỗi password do chương trình sinh ra                                 |
+
+> Không dùng tool cho `[Setting] Password` dạng hex trong `gw/goddess.cfg`, ví dụ chuỗi bắt đầu bằng `2DED...`. Đây là cơ chế khác.
+
+## Lưu ý
+
+* Password gốc dài tối đa 20 ký tự ASCII.
+* Chuỗi mã hóa luôn dài 32 ký tự.
+* Cùng một password có thể tạo ra các chuỗi mã hóa khác nhau. Các chuỗi này vẫn giải mã về cùng một kết quả.
+* Đây chỉ là cơ chế làm rối có thể giải ngược, không phải mã hóa bảo mật hiện đại.
+* Sau khi sửa file cấu hình, cần khởi động lại dịch vụ liên quan và kiểm tra log kết nối.
+* Nếu đổi password MySQL, hãy đổi password trên MySQL trước rồi cập nhật tất cả dịch vụ đang dùng chung tài khoản.
 
 ## Build
 
-Mở `gmpasstool.sln` bằng Visual Studio, chọn cấu hình:
+Mở `gmpasstool.sln` bằng Visual Studio và chọn:
 
 ```text
 Release | x64
 ```
 
-Sau đó chọn **Build Solution**. File thực thi nằm trong thư mục `x64\Release` của project.
+Sau đó chọn **Build Solution**.
 
-## Yêu cầu khi chạy trên máy client
+File chạy được tạo trong thư mục:
 
-Bản `Release | x64` dùng MFC Dynamic và toolset v143. Máy client cần cài **Microsoft Visual C++ Redistributable for Visual Studio 2015–2022 (x64)**:
+```text
+x64\Release
+```
 
-https://aka.ms/vc14/vc_redist.x64.exe
+## Yêu cầu trên máy client
 
-Nếu build bản `Release | Win32`, máy client cần runtime x86 tương ứng:
+Bản `Release | x64` sử dụng MFC Dynamic và toolset v143. Máy client cần cài:
 
-https://aka.ms/vc14/vc_redist.x86.exe
+[Microsoft Visual C++ Redistributable 2015–2022 (x64)](https://aka.ms/vc14/vc_redist.x64.exe)
 
+Nếu build bản `Release | Win32`, cài bản x86:
+
+[Microsoft Visual C++ Redistributable 2015–2022 (x86)](https://aka.ms/vc14/vc_redist.x86.exe)
