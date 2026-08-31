@@ -1,4 +1,4 @@
-# GM PassTool (MFC)
+# GM PassTool VLTK Offline
 
 Công cụ mã hóa và giải mã password dùng trong VLTK Server Offline. Giao diện được viết bằng C++ MFC và chỉnh sửa trực tiếp bằng Resource View của Visual Studio.
 
