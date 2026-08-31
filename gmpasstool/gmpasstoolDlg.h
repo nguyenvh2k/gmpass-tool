@@ -32,6 +32,7 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void OnBnClickedEncrypt();
 	afx_msg void OnBnClickedDecrypt();
+	afx_msg void OnBnClickedClear();
 	afx_msg void OnEnSetfocusOutput();
 	afx_msg void OnEnSetfocusMd5();
 	afx_msg LRESULT OnSelectAllText(WPARAM wParam, LPARAM lParam);

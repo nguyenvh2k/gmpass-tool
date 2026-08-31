@@ -3,6 +3,6 @@
   gmpasstoolDlg.cpp
   Generating code
   Previous IPDB not found, fall back to full compilation.
-  All 454 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 455 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   gmpasstool.vcxproj -> D:\Linh tinh\CPP base\bai_tap_on_tap_00_07\gmpasstool\x64\Release\gmpasstool.exe

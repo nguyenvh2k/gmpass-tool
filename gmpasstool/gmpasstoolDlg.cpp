@@ -281,6 +281,7 @@ BEGIN_MESSAGE_MAP(CgmpasstoolDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CgmpasstoolDlg::OnBnClickedEncrypt)
 	ON_BN_CLICKED(IDC_BUTTON2, &CgmpasstoolDlg::OnBnClickedDecrypt)
+	ON_BN_CLICKED(IDC_BUTTON3, &CgmpasstoolDlg::OnBnClickedClear)
 	ON_EN_SETFOCUS(IDC_EDIT3, &CgmpasstoolDlg::OnEnSetfocusOutput)
 	ON_EN_SETFOCUS(IDC_EDIT2, &CgmpasstoolDlg::OnEnSetfocusMd5)
 	ON_MESSAGE(kSelectAllTextMessage, &CgmpasstoolDlg::OnSelectAllText)
@@ -381,6 +382,14 @@ void CgmpasstoolDlg::OnBnClickedEncrypt()
 void CgmpasstoolDlg::OnBnClickedDecrypt()
 {
 	RunPasswordAction(false);
+}
+
+void CgmpasstoolDlg::OnBnClickedClear()
+{
+	SetDlgItemText(IDC_EDIT1, _T(""));
+	SetDlgItemText(IDC_EDIT2, _T(""));
+	SetDlgItemText(IDC_EDIT3, _T(""));
+	GetDlgItem(IDC_EDIT1)->SetFocus();
 }
 
 void CgmpasstoolDlg::OnEnSetfocusOutput()
